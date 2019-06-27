@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# 쿼리값의 ?를 볼 수 있게 해줌 ex) binding parameter [1] as [VARCHAR] - [피카츄]
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
