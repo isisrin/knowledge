@@ -40,3 +40,8 @@
  * 연관관계에 있는 엔티티들을 어떻게 가져올 것인가에 대한 설정 == 성능에 영향을 끼침.
  * Eager : 즉시로딩 (@ManyToOne)
  * Lazy : 지연로딩 (@OneToMany)
+
+
+#### @DataJpaTest
+기본적인 정책은 rollback임. 그래서 @Test 할 때 repository.delete() 를 해도 동작하지 않는다. 어차피 rollback에서 지워질건데 굳이 지금 delete()함수를 실행시킬 이유가 뭐야? 이 상황이 된다. <br/>
+그래도 delete()를 하려면 repository.flush()를 하자!! 이렇게 하면 removed 처리를 한다.
