@@ -7,10 +7,10 @@
 
 #### ORM? (Object Relation Mapping)
  > 맵핑 정보를 기술한 메타데이터를 기반으로 자바의 객체를 SQL Table과 연결해줌.
- ex) @Table
+ ex) @Table, @Entity
 
 
-#### Entity의 상태
+#### Entity의 상태?
 * transient : JPA(하이버네이트)가 객체들에 대해 전혀 모르는 상태 ex) Obejct test = new Obejct();
 * persistent : JPA가 알고 관리하게 되는 상태. ex) entityManager.save(test); # persistContext에 넣은 상태, 캐시된 상태
   * 이때는 더티체킹, write behind등의 관리를 해줌. <br/>
@@ -40,3 +40,22 @@
  * 연관관계에 있는 엔티티들을 어떻게 가져올 것인가에 대한 설정 == 성능에 영향을 끼침.
  * Eager : 즉시로딩 (@ManyToOne)
  * Lazy : 지연로딩 (@OneToMany)
+
+#### QueryDSL?
+ * 조건문을 작성할 때 type safe 함.
+   쿼리용 domain specific language를 만들어줌
+
+## Spring Data JPA
+##### @NoRepositorybean
+spring data jpa 혹은 다른게 CrudRepository 빈을 만들어서 등록하지 않도록 하기 위한 어노테이션 (실제 리파지토리가 아님을 표시함)
+
+##### @DataJpaTest
+@DataJpaTest 어노테이션은 기본적으로 rollback인데
+rollback하고 싶지 않으면 @Rollback(false)를 넣자!
+(H2 라이브러리를 추가했다면 Test는 H2에서 동작)
+
+##### JPA Test시 유의할 점
+@Test 할 때의 기본정책이 rollback이니, repository.delete()해도 동작하지 않는다. '어차피 rollback에서 지워질건데 뭐하러 내가 지움?' 이런느낌이다. 그래도 delete를 테스트하려면 repository.flush()를 호출하면 된다.
+
+##### @RepositoryDefinition
+나의 Custom repository를 만들 수 있다.
