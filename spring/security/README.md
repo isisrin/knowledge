@@ -32,6 +32,16 @@ OAuth 2.0 Client는 아래와 같은 기능을 제공
 
 
 #### Spring boot with OAuth2.0
+
+##### Spring Security Filter
+ - SecurityContextPersistenceFilter : SecurityContext(인증정보를 가지고 있음)에 요청을 넘기고, 공유하기 위한 기능을 제공하는 Servlet Filter. 기본동작은 리퀘스트간의 공유를 위해 HttpSession을 사용한다.
+ - OAuth2AuthorizationRequestRedirectFilter : OAuth 2.0(OpenId Connect 1.0) 프로바이더 인증 엔드포인트 (리소스 오너의 유저정보에 접근허가를 받기 위한 엔드포인트)에 리다이렉트 하기 위한 엔드포인트를 제공하는 Servlet Filter. 기본 엔드포인트 값은 '/oauth2/authorization/{registrationId}'.
+ - OAuth2LoginAuthenticationFilter : OAuth 2.0(OpenId Connect 1.0)의 토큰 엔드포인트 (액세스 토큰을 얻기 위한 엔드포인트)를 사용해서 로그인 한다. 프로바이더에서 인증한 후에 돌아오기 위해 사용되는 엔드포인트를 제공하는 Servlet Filter. 기본 값은 '/login/oauth2/code/{registrationId}'
+ - DefaultLoginPageGeneratingFilter :  기본 로그인 페이지 생성을 위한 엔드포인트를 제공하는 Servlet Filter. 기본 값은 'GET /login' 로그인페이지를 지정할 경우에는 이 필터가 사용되지 않음.
+ - ExceptionTranslationFilter : 인증에러를 핸들링해서 응답하기 위한 Servlet Filter.
+ - FilterSecurityInterceptor : 지정한 접근정책을 바탕으로 인증처리를 하는 Servlet Filter
+
+
 ##### redirect URI 세팅
  - redirect URI는 OAuth 클라이언트에서 액세스 권한을 부여한 후 리다이렉션되는 앱의 경로이다
 
