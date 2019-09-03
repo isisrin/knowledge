@@ -58,6 +58,11 @@ public static void main(String[] args) {
 * Stack(클래스) : 후입선출
 * Queue : 선입선출
     * LinkedList : List의 것과 동일 ㅇㅁㅇ!!
+    
+    
+#### ORM
+ * ORM : 참고 [https://github.com/isisrin/knowledge/blob/master/jpa/jpa.md]
+ 
 
 ## HTTP 
 
