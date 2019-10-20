@@ -68,3 +68,48 @@ runSimulation("혜린", ::printConstructionCost) {playerName, numBuildings ->
 // 함수참조를 얻을 때는 :: 연산자를 사용 
 ```
  * 클로저 : `close over`가 합쳐진 용어, 다른 함수에 포함된 함수에서 자신을 포함하는 함수의 매개변수와 변수를 사용할 수 있는 것
+ 
+#### Null처리
+ * 안전 호출 연산자
+```kotlin
+var beverage = readLine()?.capitalize()  // 있으면 capitalize()를 호출 없으면 null리턴 Optional느낌!
+
+var beverage = readLine()?.let {   // Null일 때 하고 싶은 조건을 달기위해... let을 썼음다
+  if (it.isNotBlank()) {
+      it.capitalize()
+  } else {
+      "막걸리"
+  }
+}
+```
+ * non-null 단언 연산자
+```kotlin
+var beverage = readLine()!!.capitalize()    // readLine이 뭘 리턴하던 간에 실행! null이면 익셉션 발생..
+```
+* null인지 체크
+```kotlin
+var beverage = readLine()
+
+if (beverage != null) {
+// ... 
+}
+
+val beverageServed: String = beverage ?: "막걸리"    // beverage가 null이면 막걸리 리턴 오옭...!
+```
+
+#### 예외던지기
+```kotlin
+fun proficiencyCheck(swordsJuggling: Int?) {
+    swordsJuggling ?: throw UnskilledSwordJugglerException()   //커스텀에러 던지깃!
+}
+
+class UnskilledSwordJugglerException : IllegalArgumentException("저글링이 불가눙햅")  //커스텀에러 작성
+```
+   
+#### 예외 처리
+```kotlin
+fun proficiencyCheck(swordsJuggling: Int?) {
+    checkNotNull(swordsJuggling, {"저글링이 불가눙햅"})   //전제 조건 함수 사용 
+}
+```
+ * 코틀린에선 모든 예외가 unchecked Exception!!
