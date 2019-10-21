@@ -113,3 +113,8 @@ fun proficiencyCheck(swordsJuggling: Int?) {
 }
 ```
  * 코틀린에선 모든 예외가 unchecked Exception!!
+ 
+#### 문자열
+ * replace 함수도 Java 와 마찬가지로 새로운 문자열을 출력해준당
+ * 코틀린에선 `==` 가 `String.equals()` 와 같다. (`===` 는 `String A == String B`)
+ 
