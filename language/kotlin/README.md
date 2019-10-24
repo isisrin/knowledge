@@ -118,3 +118,75 @@ fun proficiencyCheck(swordsJuggling: Int?) {
  * replace 함수도 Java 와 마찬가지로 새로운 문자열을 출력해준당
  * 코틀린에선 `==` 가 `String.equals()` 와 같다. (`===` 는 `String A == String B`)
  
+#### 표준함수
+ * 확장 함수를 실행하는 주체를 수신자 객체라하고, 확장 함수가 호출될 때 수신자 객체의 참조가 확장 함수로 전달됨 ~~멍게소리여~~
+    * apply : 람다 내부에서 해당 수신자에 대한 모든 함수 호출이 가능하도록 apply 함수가 사용 범위를 설중해 줌
+     ```kotlin
+     val menuFile = File("menu-file.txt")
+     menuFile.setReadable(true)
+     menuFile.setWritable(true)
+     menuFile.setExecutable(false)
+     
+     // apply 적용    
+     val menuFile = File("menu-file.txt").apply {
+        setReadable(true)
+        setWritable(true)
+        setExecutable(false)  // menuFile을 안써도 됨
+     // 연관 범위 (relative scoping) 혹은 수신자에 대한 암시적 호출(implicitly called)
+     }
+     ```
+    * let : 함수의 인자로 전달된 람다를 실행한 후의 결과를 리턴해줌
+     ```kotlin
+     val firstItemSquared = listOf(1,2,3).first().let {
+        it * it  // let을 호출한 수신자 객체를 참조할 수 있다
+     }  // -> 답은 1이얌!
+
+     fun formatGreeting(vipGuest: String?): String {
+       return vipGuest?.let {
+           "$vipGuest 야 앙뇽!1"   // vipGuest가 널이아니면 출력
+       } ?: {
+           "처음오셨나욤!"  // null이면 출력
+       }  
+     }
+     ```
+     > let 함수는 수신자 객체를 람다로 전달하고 람다의 실행결과를 반환함, apply는 람다의 실행이 끝나면 현재의 수신자 객체를 반환
+     * run : 수신자 객체를 반환하지 않음, 람다의 결과를 반환 =
+     ```kotlin
+     val menuFile = File("menu-file.txt")
+     val servesDragonsBreath = menuFile.run {
+       readText().contains("Dragon's Breath")  // false 반환
+     }
+
+     fun nameIsLong(name: String) = name.length >= 20
+     "hyerin".run(::nameIsLong)  // false반환
+     "hyerin + 나옹 + 우리는 행보캐! 니니닝".run(::nameIsLong)  // true 반환   
+  
+     ```
+     > 중첩해서 썼을 때 빛을 발휘하는 듯 ex) "hyerin".run(::nameIsLong).run(::createMessage).run(::println)
+     * with : run과 같은 동작이지만 호출이 다름
+     ```kotlin
+       val nameTooLong = with("니나오~~ 니나노~~ 뱃놀이가자아아~") {
+           length >= 20
+       } // -> 수신자 객체가 파라미터로 전달됨 run을 권장한다고 합니다
+     ```
+     * also : let과 비슷하게 동작, 자신을 호출한 수신자 객체를 람다의 인자로 전달 후 `수신자 객체를`반환
+     ```kotlin
+     var fileContents: List<String>
+     File("file.txt").also {
+       print(it.name)
+     }.also {
+       fileContents = it.readLines()
+     }  // return this; 같은 느낌이라서 연쇄호출이 가능하다고 하네양!
+     ```
+     * takeIf : 람다에 제공된 조건식(predicate)를 싱행한 후 그 결과에 따라 true, false 리턴
+     ```kotlin
+     val fileContents = File("myfile.txt")
+         .takeIf { it.canRead() && it.canWrite() }  
+         ?.readText()  // 조건문이 true면 file을 리턴할 테니 file을 읽는 것이로군용!
+     ```     
+     > 조건식의 결과가 true면 객체반환, false면 null반환
+     * takeIf : false일 때 값을 반환
+     ```kotlin
+     val fileContents = File("myfile.txt").takeUnless { it.isHidden }?.readTest() //->그닥 권장 ㄴㄴ
+     ```
+     
