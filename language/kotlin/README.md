@@ -189,4 +189,18 @@ fun proficiencyCheck(swordsJuggling: Int?) {
      ```kotlin
      val fileContents = File("myfile.txt").takeUnless { it.isHidden }?.readTest() //->그닥 권장 ㄴㄴ
      ```
-     
+
+#### 컬렉션
+ * List
+ ```kotlin
+ val patronList: List<String> = listOf("태태", "망개", "슙슙")  // 읽기전용 list를 만들어 줍니다
+ patronList.getOrElse(4) { "없어요 없어!!" }   // 없어요 없어 출력
+ patronList.getOrNull(4) ?: "누구세요 누구!!"  // 누구세요 출력
+ 
+ val patronList = mutableListOf("태태", "슙슙", "호비") // 수정가능한 리스트를 만들어 줍니다
+ val readOnlyList = patronList.toList() // 읽기전용 리스트로 바꿔준닭!
+ 
+ patronList.forEachIndexed { index, patron ->   // forEach를 쓰면서 인덱스도 필요할 때 오올!!
+     println("안녕하세용 $patron 님! $index 번째로 도착하셨네용!!")
+ }
+ ```
