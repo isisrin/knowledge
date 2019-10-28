@@ -204,3 +204,9 @@ fun proficiencyCheck(swordsJuggling: Int?) {
      println("안녕하세용 $patron 님! $index 번째로 도착하셨네용!!")
  }
  ```
+ 
+ * Set
+ ```kotlin
+ val lastName = setOf("김", "민", "정")
+ ```
+ -> 코틀린에서는 Arrays 타입으로 배열을 지원. (ex. IntArray -> intArrayOf())

@@ -1,5 +1,4 @@
 import java.io.File
-import kotlin.math.roundToInt
 
 const val TAVERN_NAME = "나옹's 펍"
 var playerGold = 10
@@ -8,6 +7,7 @@ val patronList = mutableListOf("태태", "슙슙", "호비")
 val menuList = File("data/tavern-menu-items.txt")
                 .readText()
                 .split("\r\n")
+val menuStartCount = 30
 
 fun main(args: Array<String>) {
     if (patronList.contains("태태")) {
@@ -27,9 +27,22 @@ fun main(args: Array<String>) {
         placeOrder(patron, menuList.shuffled().first())
     }
 
+    println("*** 어서오세용~~ $TAVERN_NAME ***")
     menuList.forEachIndexed { index, data ->
-        println("$index :  $data")
+            var (firstName, secondName, price) = data.split(",")
+            var productLength = "$firstName$secondName$price".length
+            var star = getStars(productLength)
+            println("$firstName $secondName$star$price")
     }
+}
+
+private fun getStars(productLength: Int): String{
+    var star = "*"
+    println("머리가 아프다 $productLength")
+    for (i in 0..menuStartCount.minus(productLength)) {
+        star += "*"
+    }
+    return star
 }
 
 private fun placeOrder(patronName: String, menuData: String) {
