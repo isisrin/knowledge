@@ -23,7 +23,19 @@ fun main(args: Array<String>) {
         println("술집 주인나옹이 말한다: 아뇨, 둘 다 있진 않아요")
     }
 
-    patronList.forEachIndexed { index, patron ->
+    (0..9).forEach {
+        val first = patronList.shuffled().first()
+        val last = lastName.shuffled().first()
+        val name = "$first $last"
+        uniquePatrons += name
+    }
+    println(uniquePatrons)
+
+    uniquePatrons.forEach {
+        patronGold[it] = 6.0
+    }
+
+    uniquePatrons.forEachIndexed { index, patron ->
         println("안녕하세용 $patron 님! ${index + 1} 번째로 도착하셨네용!!")
         placeOrder(patron, menuList.shuffled().first())
     }
@@ -36,22 +48,13 @@ fun main(args: Array<String>) {
             println("$firstName $secondName$star$price")
     }
 
-    (0..9).forEach {
-        val first = patronList.shuffled().first()
-        val last = lastName.shuffled().first()
-        val name = "$first $last"
-        uniquePatrons += name
-    }
+    displayPatronBalances()
     println(uniquePatrons)
-
-    uniquePatrons.forEach {
-        patronGold[it] = 6.0
-    }
+    println(patronGold)
 }
 
 private fun getStars(productLength: Int): String{
     var star = "*"
-    println("머리가 아프다 $productLength")
     for (i in 0..menuStartCount.minus(productLength)) {
         star += "*"
     }
@@ -94,7 +97,16 @@ fun performPurchase(price: Double, patronName: String) {
 }
 
 private fun displayPatronBalances() {
-    patronGold.forEach { patron, balace -> {
-        println("$patron, balance: ${"%.2f".format(balance)}")
+    var removableList = mutableListOf<String>()
+    patronGold.forEach { patron, balance ->
+        if (balance < 0) {
+            println("잘가요... $patron 돈이 없는 손님은 안돼요...")
+            removableList.add(patron)
+        }
+    }
+
+    removableList.forEach{
+        uniquePatrons.remove(it)
+        patronGold.remove(it)
     }
 }
