@@ -210,3 +210,11 @@ fun proficiencyCheck(swordsJuggling: Int?) {
  val lastName = setOf("김", "민", "정")
  ```
  -> 코틀린에서는 Arrays 타입으로 배열을 지원. (ex. IntArray -> intArrayOf())
+ 
+#### 클래스
+ * 코틀린에서는 접근제한자를 걸지 않으면 기본으로 `public`임
+    * internal : 함수나 속성이 정의된 클래스가 포함된 모듈(module)에서 사용될 수 있
+ * getter, setter
+    * 코틀린에서는 getter, setter가 자동 생성됨. 
+    * 별도로 쓰고 싶을 경우는 get(), set(value)등의 함수를 추가해야 함
+    
