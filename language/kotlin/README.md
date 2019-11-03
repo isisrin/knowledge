@@ -217,4 +217,23 @@ fun proficiencyCheck(swordsJuggling: Int?) {
  * getter, setter
     * 코틀린에서는 getter, setter가 자동 생성됨. 
     * 별도로 쓰고 싶을 경우는 get(), set(value)등의 함수를 추가해야 함
+ * var, val 내부 구현
+ ```kotlin
+ class Student(var name: String)  // 디컴파일 해보면 ... 아래와 같다
+
+ public final class Student {
+    @NotNull
+    private String name;
+
+    @NotNull
+    public final String getName() {
+        return this.name;
+    }   
     
+    public final void setName(@NotNull String val1) {
+        Intrinsics.checkParameterIsNotNull(val1, "<set-?>");
+        this.name = val1;
+    }  // -> var에는 set함수가 있음, val에는 없음
+ }
+ ```
+ * internal : 같은 모듈안에 있는 클래스, 함수, 속성끼리 사용가능

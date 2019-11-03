@@ -1,7 +1,5 @@
+// TODO: ㅍㅐ키지 만들어야 행 ㅠㅠ
 fun main(args: Array<String>) {
-    val healthPoints = 100
-    val isBlessed = true
-    val isImmortal = false
 
     val player = Player()
     player.castFireball()
@@ -9,7 +7,7 @@ fun main(args: Array<String>) {
     val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
     val healthStatus = formatHealthStatus(healthPoints, isBlessed)
 
-    printPlayerStatus(auraColor, isBlessed = true, player.name, healthStatus = healthStatus)
+    printPlayerStatus(player)
     castFireball()
 
     performCombat()
@@ -17,31 +15,9 @@ fun main(args: Array<String>) {
     performCombat("나옹", true)
 }
 
-private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) = when (healthPoints) {
-        100 -> "컨디션 최고에염!"
-        in 90..99 -> "좀 별로에염 ㅠㅠ"
-        in 75..89 -> if (isBlessed) {
-            "포션빨아써염"
-        } else {
-            "컨디션 최악이에염 ㅠㅠ"
-        }
-        in 15..74 -> "집이 생각난다우!!!!!!!!1"
-        else -> "집에 보내주라줘!!"
-    }
-
-private fun printPlayerStatus(
-    auraColor: String,
-    isBlessed: Boolean,
-    name: String,
-    healthStatus: String
-) {
-    println("(Aura : $auraColor) " + "(Blessed: ${if (isBlessed) "YES" else "NO"})")
-    println("$name $healthStatus")
-}
-
-private fun auraColor(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean) =  when (isBlessed && healthPoints > 50 || isImmortal) {
-        true -> "GREEN"
-        else -> "NONE"
+private fun printPlayerStatus(player: Player) {
+    println("(Aura : ${player.auraColor()} " + "(Blessed: ${if (player.isBlessed) "YES" else "NO"})")
+    println("${player.name} ${player.formatHealthStatus()}")
 }
 
 private fun performCombat() = println("쓰러트릴 적이 없음돠")
