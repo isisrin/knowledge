@@ -1,15 +1,11 @@
-// TODO: ㅍㅐ키지 만들어야 행 ㅠㅠ
+package com.bignerdranch.nyethack
+
 fun main(args: Array<String>) {
 
-    val player = Player()
+    val player = Player("")
     player.castFireball()
 
-    val auraColor = auraColor(isBlessed, healthPoints, isImmortal)
-    val healthStatus = formatHealthStatus(healthPoints, isBlessed)
-
     printPlayerStatus(player)
-    castFireball()
-
     performCombat()
     performCombat("나옹")
     performCombat("나옹", true)

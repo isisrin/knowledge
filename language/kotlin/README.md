@@ -237,3 +237,25 @@ fun proficiencyCheck(swordsJuggling: Int?) {
  }
  ```
  * internal : 같은 모듈안에 있는 클래스, 함수, 속성끼리 사용가능
+ * 생성자 
+ ```kotlin
+ // 아래와 같이 선언하면 클래스 속성겸 생성자 매개변수로 쓸 수 있당!
+ class Player (_name: String, var healthPoints: Int, val isBlessed: Boolean, private val isImmortal: Boolean) { 
+ 
+ // 아래와 같이 생성자를 만들 수 있댱!
+ constructor(name: String) : this (name,
+     healthPoints = 100,
+     isBlessed = true,
+     isImmortal = false)
+         
+ }
+ 
+ // 속성값 검사도 할 수 있다아앙!!!
+ init {
+     require(healthPoints > 0, { "healthPoints는 0보다 커야 해욥!" })
+     require(name.isNotBlank(), { "플레이어는 이름이 있어야 행!" })
+ }
+ 
+ // 늦 초기화, 다른 코드에서 최초 사용될 때 비로소 실행되어 초기화 됨
+ val hometown by lazy { selectHometown() }
+ ```

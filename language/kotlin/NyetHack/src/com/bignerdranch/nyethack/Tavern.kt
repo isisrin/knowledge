@@ -1,3 +1,5 @@
+package com.bignerdranch.nyethack
+
 import java.io.File
 
 const val TAVERN_NAME = "나옹's 펍"
@@ -8,7 +10,7 @@ val menuList = File("data/tavern-menu-items.txt")
                 .readText()
                 .split("\r\n")
 val patronGold = mutableMapOf<String, Double>()
-val menuStartCount = 30
+const val menuStartCount = 30
 
 fun main(args: Array<String>) {
     if (patronList.contains("태태")) {

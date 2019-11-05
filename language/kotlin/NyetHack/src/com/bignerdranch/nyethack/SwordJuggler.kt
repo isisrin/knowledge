@@ -1,12 +1,20 @@
-//const val TAVERN_NAME = "나옹's 펍"
-//fun main(args: Array<String>) {
-//
+package com.bignerdranch.nyethack
+
+//const val com.bignerdranch.nyethack.TAVERN_NAME = "나옹's 펍"
+fun main(args: Array<String>) {
+
+    val firstItemSquared = listOf(1,2,3).first().let {
+        it * it
+    }
+    println(firstItemSquared)
+
+//    val menuFIle
 //    placeOrder("느린마을,막걸리,8.000")
-//}
+}
 //
 //private fun placeOrder(menuData: String) {
-//    val indexOfApostrophe = TAVERN_NAME.indexOf('\'')
-//    val tavernMaster = TAVERN_NAME.substring(0 until indexOfApostrophe)
+//    val indexOfApostrophe = com.bignerdranch.nyethack.TAVERN_NAME.indexOf('\'')
+//    val tavernMaster = com.bignerdranch.nyethack.TAVERN_NAME.substring(0 until indexOfApostrophe)
 //    println("게린이눈 $tavernMaster 에게 주문한다.")
 //
 //    val (type, name, price) = menuData.split(',')
