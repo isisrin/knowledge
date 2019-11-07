@@ -5,6 +5,10 @@ fun main(args: Array<String>) {
     val player = Player("")
     player.castFireball()
 
+    var currentRoom: Room = TownSquare()
+    println(currentRoom.description())
+    println(currentRoom.load())
+
     printPlayerStatus(player)
     performCombat()
     performCombat("나옹")

@@ -259,3 +259,22 @@ fun proficiencyCheck(swordsJuggling: Int?) {
  // 늦 초기화, 다른 코드에서 최초 사용될 때 비로소 실행되어 초기화 됨
  val hometown by lazy { selectHometown() }
  ```
+ * 상속
+ ```kotlin
+ open class Room(val name: String) {  // 상속가능 하도록 open 키워드 추가
+ 
+ 
+ 
+ 
+ open class Room(val name: String) {
+     fun description() = "Room: $name"
+ 
+     open fun load() = "아무도 여기에 오지 않았습니닭!"   // 오버라이드 할 수 있는 함수에 open 키워드를 추가한다
+ }
+ 
+ class TownSquare : Room("게링이네") {   // 상속을 받으려면 요렇게 해야 한다아.. 슈퍼클래스의 생성자가 호출되어야 해서
+     override fun load() = "당신의 참여를 돈동네사람들이 환영한다구리!!"  
+ }
+ 
+  final override fun load() = "당신의 참여를 돈동네사람들이 환영한다구리!! \r\n ${ringBell()}" // 상속 못하게 막늗아아아아앗
+ ```
