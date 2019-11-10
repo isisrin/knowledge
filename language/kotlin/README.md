@@ -278,3 +278,17 @@ fun proficiencyCheck(swordsJuggling: Int?) {
  
   final override fun load() = "당신의 참여를 돈동네사람들이 환영한다구리!! \r\n ${ringBell()}" // 상속 못하게 막늗아아아아앗
  ```
+ * 객체
+    * object 캐워드를 사용하는 법
+        1. 객체 선언
+        2. 객체 표현식
+        3. 동반 객체
+ 
+ ```kotlin
+ object Game {  // 객체 선언
+ }
+ 
+ val abandonedTownSquare = object : TownSquare() {   // 익명클래스 선언
+    override fun load() = "아무도 없네여ㅠㅠ"
+ }
+ ```
