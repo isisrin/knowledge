@@ -282,7 +282,9 @@ fun proficiencyCheck(swordsJuggling: Int?) {
     * object 캐워드를 사용하는 법
         1. 객체 선언
         2. 객체 표현식
-        3. 동반 객체
+        3. 동반 객체 : 최상위 수준에서 사용불가, 클래스 내부에 정의
+    
+    ==> 2,3번은 클래스 이름이 딱히 없다
  
  ```kotlin
  object Game {  // 객체 선언
@@ -291,4 +293,18 @@ fun proficiencyCheck(swordsJuggling: Int?) {
  val abandonedTownSquare = object : TownSquare() {   // 익명클래스 선언
     override fun load() = "아무도 없네여ㅠㅠ"
  }
+
+ class PremadeWorldMap {
+    ...
+    companion object {   // 동반 객체 선언능
+        // 동반객체의 속성이나 함수를 자신의 속성이나 함수인 것으로 인식
+        // 하나의 클래스에는 하나의 동반객체만 선언 가
+    }   
+ }
+ PremadeWorldMap.load()  //로 호출가능
  ```
+ * data class 
+    * 최소한 하나의 매개변수를 갖는 기본 생성자를 가져야 함
+    * 기본 생성자의 매개변수에는 val이라 var이 지정되어야 함. -> 속성이 생기기 때문
+    * abstract, open, sealed, inner 키워드 등을 지정할 수 없음
+ 

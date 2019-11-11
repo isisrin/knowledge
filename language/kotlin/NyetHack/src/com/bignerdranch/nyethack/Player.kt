@@ -10,6 +10,7 @@ class Player (_name: String, var healthPoints: Int = 100, val isBlessed: Boolean
     }
 
     val hometown by lazy { selectHometown() }
+    var currentPosition = Coordinate(0, 0)
 
     init {
         require(healthPoints > 0, { "healthPoints는 0보다 커야 해욥!" })
